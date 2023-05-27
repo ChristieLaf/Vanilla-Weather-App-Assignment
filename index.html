@@ -12,7 +12,7 @@
     />
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src./style.css" />
-    <title><Vanilla-Weather-App></Vanilla-Weather-App></title>
+    <title>Vanilla-Weather-App</title>
   </head>
   <body>
     <div class="container">
@@ -55,14 +55,21 @@
                 />
                 <div>
                   <strong id="temperature">60</strong>
-                  <span class="units">°C |<a href="#"> °F</a> </span>
+                  <span class="units"
+                    ><a href="#" id="celsius-link" class="active">°C</a> |<a
+                      href="#"
+                      id="fahrenheit-link"
+                    >
+                      °F</a
+                    >
+                  </span>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <ul>
                 <li>Humidity: <span id="humidity"></span>%</li>
-                <li>Wind: <span id="Wind"></span></li>
+                <li>Wind: <span id="Wind"></span>km/h</li>
               </ul>
             </div>
           </div>
