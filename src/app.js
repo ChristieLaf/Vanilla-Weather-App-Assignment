@@ -88,3 +88,34 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("New York");
+
+function revealImperialWindRate(event) {
+  event.preventDefault();
+  let windElementRate = document.querySelector("#wind");
+
+  metricWindUnitLink.classList.remove("active");
+  imperialWindUnitLink.classList.add("active");
+
+  metricWindRate = Math.round(response.data.wind.speed * 3.6) * 1;
+  let imperialWindRate = Math.round(metricWindRate / 1.609344);
+  windElementRate.innerHTML = Math.round(imperialWindRate);
+}
+
+function revealMetricWindRate(event) {
+  event.preventDefault();
+
+  metricWindUnitLink.classList.add("active");
+  imperialWindUnitLink.classList.remove("active");
+
+  let windElementRate = document.querySelector("#wind");
+
+  metricWindRate = Math.round(response.data.wind.speed * 3.6) * 1;
+
+  windElementRate.innerHTML = Math.round(metricWindRate);
+}
+
+let metricWindUnitLink = document.querySelector("#metric-wind-unit-link");
+metricWindUnitLink.addEventListener("click", revealMetricWindRate);
+
+let imperialWindUnitLink = document.querySelector("#imperial-wind-unit-link");
+imperialWindUnitLink.addEventListener("click", revealImperialWindRate);
