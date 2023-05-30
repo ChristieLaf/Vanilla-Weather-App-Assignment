@@ -4,6 +4,8 @@ function formatDate(timestamp) {
   if (hours < 10) {
     hours = `0${hours}`;
   }
+  let AmOrPm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12;
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
@@ -19,7 +21,7 @@ function formatDate(timestamp) {
     "Saturday",
   ];
   let day = days[date.getDay()];
-  return `${day} ${hours}:${minutes}`;
+  return `${day} ${hours}:${minutes} ${AmOrPm}`;
 }
 
 function displayTemperature(response) {
@@ -119,3 +121,13 @@ metricWindUnitLink.addEventListener("click", revealMetricWindRate);
 
 let imperialWindUnitLink = document.querySelector("#imperial-wind-unit-link");
 imperialWindUnitLink.addEventListener("click", revealImperialWindRate);
+
+// Function to convert kmph to mph
+function kmphTOmph(kmph) {
+  return 0.6214 * kmph;
+}
+
+// Function to convert mph to kmph
+function mphTOkmph(mph) {
+  return 1.60934 * mph;
+}
