@@ -86,12 +86,13 @@ function displayTemperature(response) {
   let iconElement = document.querySelector("#icon");
 
   celsiusTemperature = response.data.main.temp;
+  metricWindRate = response.data.wind.speed * 3.6;
 
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
-  windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
+  windElement.innerHTML = Math.round(metricWindRate);
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
   iconElement.setAttribute(
     "src",
@@ -117,7 +118,6 @@ function handleSubmit(event) {
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
   let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
@@ -133,6 +133,7 @@ function displayCelsiusTemperature(event) {
 }
 
 let celsiusTemperature = null;
+let metricWindRate = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
@@ -144,3 +145,26 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("New York");
+
+function revealImperialWindRate(event) {
+  event.preventDefault();
+  let windElementRate = document.querySelector("#wind");
+  metricWindUnitLink.classList.remove("active");
+  imperialWindUnitLink.classList.add("active");
+  let imperialWindRate = metricWindRate * 0.62137119223733;
+  windElementRate.innerHTML = Math.round(imperialWindRate);
+}
+
+function revealMetricWindRate(event) {
+  event.preventDefault();
+  metricWindUnitLink.classList.add("active");
+  imperialWindUnitLink.classList.remove("active");
+  let windElementRate = document.querySelector("#wind");
+  windElementRate.innerHTML = Math.round(metricWindRate);
+}
+
+let metricWindUnitLink = document.querySelector("#metric-wind-unit-link");
+metricWindUnitLink.addEventListener("click", revealMetricWindRate);
+
+let imperialWindUnitLink = document.querySelector("#imperial-wind-unit-link");
+imperialWindUnitLink.addEventListener("click", revealImperialWindRate);
